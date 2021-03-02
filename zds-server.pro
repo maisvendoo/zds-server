@@ -8,4 +8,7 @@ QT += network
 
 DESTDIR = ../bin
 
-SOURCES += main.cpp
+INCLUDEPATH += ./include
+
+HEADERS += $$files(./include/*.h)
+SOURCES += $$files(./src/*.cpp)

@@ -1,4 +1,4 @@
-#include    <QCoreApplication>
+#include    "app.h"
 
 #include    <QTcpServer>
 #include    <QTcpSocket>
@@ -64,9 +64,12 @@ private slots:
     }
 };
 
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
+    App app(argc, argv);
 
     TcpServer server;
 
