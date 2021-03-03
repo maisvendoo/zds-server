@@ -6,6 +6,8 @@
 #include    <QFile>
 #include    <QDataStream>
 
+#include    "zds-auth-data.h"
+
 class TcpServer : public QTcpServer
 {
 public:
@@ -59,8 +61,28 @@ private slots:
             dump.close();
         }
 
-        socket->disconnectFromHost();
-        socket->abort();
+        zds_auth_data_t zds_auth;
+        memcpy((void *) &zds_auth, data.data(), data.count());
+
+        switch (zds_auth.id)
+        {
+        case 1:
+
+            QByteArray code;
+            code.append(0xC8);
+
+            socket->write(code);
+            socket->flush();
+
+            QByteArray time;
+            time.append(12);
+            time.append(5);
+
+            socket->write(time);
+            socket->flush();
+
+            break;
+        }
     }
 };
 
